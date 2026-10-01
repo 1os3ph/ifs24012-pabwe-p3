@@ -11,8 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const navTabs = document.querySelectorAll('.nav-tab');
     const tabContents = document.querySelectorAll('.tab-content');
     
-    // Ambil tab terakhir dari localStorage atau default ke 'tab-expense'
-    const activeTabId = localStorage.getItem('pabwe_active_tab') || 'tab-expense';
+    // Ambil tab terakhir dari URL Parameter, lalu localStorage, atau default
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    let activeTabId = 'tab-expense';
+    
+    if (tabParam && document.getElementById(`tab-${tabParam}`)) {
+        activeTabId = `tab-${tabParam}`;
+    } else {
+        activeTabId = localStorage.getItem('pabwe_active_tab') || 'tab-expense';
+    }
     
     function activateTab(targetId) {
         // Update Buttons
@@ -37,6 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Simpan ke localStorage
         localStorage.setItem('pabwe_active_tab', targetId);
+        
+        // Update URL Query Param (tanpa me-refresh halaman)
+        const tabName = targetId.replace('tab-', '');
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('tab', tabName);
+        window.history.replaceState(null, '', newUrl);
     }
     
     // Inisialisasi tab aktif
