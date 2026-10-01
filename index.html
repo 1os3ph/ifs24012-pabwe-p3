@@ -135,7 +135,7 @@
                     </ul>
                     <!-- Empty State -->
                     <div id="expense-empty" class="py-12 flex flex-col items-center justify-center text-center hidden">
-                        <img src="https://illustrations.popsy.co/gray/crashed-error.svg" alt="Ilustrasi belum ada transaksi yang dicatat" width="160" height="160" loading="lazy" class="h-40 mb-4 opacity-70">
+                        <img src="assets/icons8-nothing-found-50.png" alt="Ilustrasi belum ada transaksi yang dicatat" width="96" height="96" loading="lazy" class="w-24 h-24 mb-4 opacity-80" style="image-rendering: auto;">
                         <h3 class="text-lg font-medium text-gray-900">Belum ada transaksi</h3>
                         <p class="text-sm text-gray-600 mt-1">Mulai catat keuanganmu dengan menekan tombol tambah.</p>
                     </div>
@@ -179,7 +179,7 @@
             
             <!-- Empty State -->
             <div id="bookmark-empty" class="bg-white rounded-xl py-12 flex flex-col items-center justify-center text-center border border-gray-100 hidden">
-                <img src="https://illustrations.popsy.co/gray/web-design.svg" alt="Ilustrasi belum ada bookmark yang disimpan" width="160" height="160" loading="lazy" class="h-40 mb-4 opacity-70">
+                <img src="assets/icons8-nothing-found-50.png" alt="Ilustrasi belum ada bookmark yang disimpan" width="96" height="96" loading="lazy" class="w-24 h-24 mb-4 opacity-80" style="image-rendering: auto;">
                 <h3 class="text-lg font-medium text-gray-900">Belum ada bookmark</h3>
                 <p class="text-sm text-gray-600 mt-1">Simpan link artikel atau materi kuliahmu di sini.</p>
             </div>
@@ -233,7 +233,9 @@
 
                 <!-- Result Screen -->
                 <div id="quiz-result-screen" class="hidden absolute inset-0 flex-col items-center justify-center p-8 text-center bg-white z-20">
-                    <img src="https://illustrations.popsy.co/gray/success.svg" alt="Ilustrasi kuis selesai dengan sukses" width="160" height="160" loading="lazy" class="h-40 mb-4">
+                    <div class="w-24 h-24 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4" aria-hidden="true">
+                        <i class="ti ti-trophy text-5xl"></i>
+                    </div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Kuis Selesai!</h3>
                     <p class="text-gray-600 mb-6">Ini dia hasil pencapaianmu.</p>
                     
