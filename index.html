@@ -44,7 +44,7 @@
 <body class="min-h-screen flex flex-col">
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-10">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex-shrink-0 flex items-center gap-2">
@@ -135,7 +135,9 @@
                     </ul>
                     <!-- Empty State -->
                     <div id="expense-empty" class="py-12 flex flex-col items-center justify-center text-center hidden">
-                        <img src="assets/icons8-nothing-found-50.png" alt="Ilustrasi belum ada transaksi yang dicatat" width="96" height="96" loading="lazy" class="w-24 h-24 mb-4 opacity-80" style="image-rendering: auto;">
+                        <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-4 text-gray-300" aria-hidden="true">
+                            <i class="ti ti-receipt-off text-5xl"></i>
+                        </div>
                         <h3 class="text-lg font-medium text-gray-900">Belum ada transaksi</h3>
                         <p class="text-sm text-gray-600 mt-1">Mulai catat keuanganmu dengan menekan tombol tambah.</p>
                     </div>
@@ -179,7 +181,9 @@
             
             <!-- Empty State -->
             <div id="bookmark-empty" class="bg-white rounded-xl py-12 flex flex-col items-center justify-center text-center border border-gray-100 hidden">
-                <img src="assets/icons8-nothing-found-50.png" alt="Ilustrasi belum ada bookmark yang disimpan" width="96" height="96" loading="lazy" class="w-24 h-24 mb-4 opacity-80" style="image-rendering: auto;">
+                <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-4 text-gray-300" aria-hidden="true">
+                    <i class="ti ti-bookmark-off text-5xl"></i>
+                </div>
                 <h3 class="text-lg font-medium text-gray-900">Belum ada bookmark</h3>
                 <p class="text-sm text-gray-600 mt-1">Simpan link artikel atau materi kuliahmu di sini.</p>
             </div>
