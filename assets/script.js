@@ -547,11 +547,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update Progress
         const qNum = currentQuestionIndex + 1;
+        const progressPercent = Math.round((qNum / quizData.length) * 100);
         qProgressText.textContent = `Soal ${qNum} / ${quizData.length}`;
-        qProgressBar.style.width = `${(qNum / quizData.length) * 100}%`;
+        qProgressBar.style.width = `${progressPercent}%`;
+        qProgressBar.parentElement.setAttribute('aria-valuenow', progressPercent);
         
         // Render Question
-        qQuestionText.innerHTML = q.question; // Pakai innerHTML karena mungkin ada tag
+        qQuestionText.textContent = q.question; // textContent safer for XSS
         
         // Render Options
         qOptionsContainer.innerHTML = '';
@@ -560,18 +562,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         q.options.forEach((opt, index) => {
             const btn = document.createElement('button');
+            const letter = String.fromCharCode(65 + index);
             btn.className = 'w-full text-left p-4 rounded-xl border-2 border-gray-100 hover:border-primary hover:bg-indigo-50 font-medium text-gray-700 transition-all quiz-option';
-            btn.innerHTML = `<span class="inline-block w-6 h-6 rounded-full bg-gray-100 text-center text-sm leading-6 mr-3 text-gray-500 font-bold">${String.fromCharCode(65 + index)}</span> ${opt}`;
+            btn.setAttribute('aria-label', `Pilihan ${letter}: ${opt}`);
+            btn.innerHTML = `<span class="inline-block w-6 h-6 rounded-full bg-gray-100 text-center text-sm leading-6 mr-3 text-gray-700 font-bold" aria-hidden="true">${letter}</span> ${opt}`;
             
             btn.addEventListener('click', () => {
                 // Hapus state aktif dari semua opsi
                 document.querySelectorAll('.quiz-option').forEach(el => {
                     el.classList.remove('border-primary', 'bg-indigo-50', 'ring-2', 'ring-primary', 'ring-opacity-50');
                     el.classList.add('border-gray-100');
+                    el.setAttribute('aria-pressed', 'false');
                 });
                 // Set aktif
                 btn.classList.add('border-primary', 'bg-indigo-50', 'ring-2', 'ring-primary', 'ring-opacity-50');
                 btn.classList.remove('border-gray-100');
+                btn.setAttribute('aria-pressed', 'true');
                 
                 selectedOptionIndex = index;
                 btnNext.classList.remove('hidden'); // Tampilkan tombol Next
