@@ -27,10 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
         navTabs.forEach(tab => {
             if (tab.dataset.target === targetId) {
                 tab.classList.add('text-primary', 'bg-indigo-50');
-                tab.classList.remove('text-gray-600', 'hover:bg-gray-100');
+                tab.classList.remove('text-gray-700', 'hover:bg-gray-100');
+                tab.setAttribute('aria-selected', 'true');
             } else {
                 tab.classList.remove('text-primary', 'bg-indigo-50');
-                tab.classList.add('text-gray-600', 'hover:bg-gray-100');
+                tab.classList.add('text-gray-700', 'hover:bg-gray-100');
+                tab.setAttribute('aria-selected', 'false');
             }
         });
         
@@ -160,30 +162,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.className = 'p-4 sm:p-5 hover:bg-gray-50 transition-colors flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4';
                 
                 const isIncome = exp.type === 'Pemasukan';
-                const typeColorClass = isIncome ? 'text-emerald-600 bg-emerald-50 border-emerald-100' : 'text-rose-600 bg-rose-50 border-rose-100';
+                const typeColorClass = isIncome ? 'text-emerald-700 bg-emerald-50 border-emerald-100' : 'text-rose-700 bg-rose-50 border-rose-100';
                 const typeIcon = isIncome ? 'ti-trending-up' : 'ti-trending-down';
 
                 li.innerHTML = `
                     <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg border ${typeColorClass}">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg border ${typeColorClass}" aria-hidden="true">
                             <i class="ti ${typeIcon}"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-gray-900">${exp.title}</h4>
+                            <h3 class="font-semibold text-gray-900">${exp.title}</h3>
                             <div class="flex items-center gap-2 mt-1">
-                                <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">${exp.category}</span>
-                                <span class="text-xs text-gray-500"><i class="ti ti-calendar text-gray-400"></i> ${exp.date}</span>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-medium">${exp.category}</span>
+                                <span class="text-xs text-gray-600"><i class="ti ti-calendar text-gray-500" aria-hidden="true"></i> ${exp.date}</span>
                             </div>
                         </div>
                     </div>
                     <div class="flex items-center justify-between w-full sm:w-auto gap-4">
-                        <span class="font-bold ${isIncome ? 'text-emerald-600' : 'text-gray-900'}">${isIncome ? '+' : '-'}${formatRupiah(exp.amount)}</span>
+                        <span class="font-bold ${isIncome ? 'text-emerald-700' : 'text-gray-900'}">${isIncome ? '+' : '-'}${formatRupiah(exp.amount)}</span>
                         <div class="flex gap-2">
-                            <button onclick="editExpense('${exp.id}')" class="p-2 text-gray-400 hover:text-primary hover:bg-indigo-50 rounded-lg transition-colors" title="Ubah">
-                                <i class="ti ti-edit"></i>
+                            <button onclick="editExpense('${exp.id}')" aria-label="Ubah transaksi ${exp.title}" class="p-2 text-gray-600 hover:text-primary hover:bg-indigo-50 rounded-lg transition-colors" title="Ubah">
+                                <i class="ti ti-edit" aria-hidden="true"></i>
                             </button>
-                            <button onclick="confirmDeleteExpense('${exp.id}')" class="p-2 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors" title="Hapus">
-                                <i class="ti ti-trash"></i>
+                            <button onclick="confirmDeleteExpense('${exp.id}')" aria-label="Hapus transaksi ${exp.title}" class="p-2 text-gray-600 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition-colors" title="Hapus">
+                                <i class="ti ti-trash" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -348,22 +350,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.innerHTML = `
                     <div class="flex justify-between items-start mb-3">
                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-gray-100 text-gray-700 text-xs font-medium">
-                            <i class="ti ti-tag"></i> ${bm.category}
+                            <i class="ti ti-tag" aria-hidden="true"></i> ${bm.category}
                         </span>
-                        <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="editBookmark('${bm.id}')" class="p-1.5 text-gray-400 hover:text-gray-900 bg-white hover:bg-gray-100 rounded-md transition-colors">
-                                <i class="ti ti-edit"></i>
+                        <div class="flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                            <button onclick="editBookmark('${bm.id}')" aria-label="Ubah bookmark ${bm.title}" class="p-1.5 text-gray-600 hover:text-gray-900 bg-white hover:bg-gray-100 rounded-md transition-colors" title="Ubah">
+                                <i class="ti ti-edit" aria-hidden="true"></i>
                             </button>
-                            <button onclick="confirmDeleteBookmark('${bm.id}')" class="p-1.5 text-gray-400 hover:text-rose-600 bg-white hover:bg-rose-50 rounded-md transition-colors">
-                                <i class="ti ti-trash"></i>
+                            <button onclick="confirmDeleteBookmark('${bm.id}')" aria-label="Hapus bookmark ${bm.title}" class="p-1.5 text-gray-600 hover:text-rose-700 bg-white hover:bg-rose-50 rounded-md transition-colors" title="Hapus">
+                                <i class="ti ti-trash" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
                     <h3 class="font-bold text-gray-900 text-lg mb-1 line-clamp-1" title="${bm.title}">${bm.title}</h3>
-                    <a href="${bm.url}" target="_blank" rel="noopener noreferrer" class="text-sm text-primary hover:underline flex items-center gap-1 mb-3 line-clamp-1" title="${bm.url}">
-                        <i class="ti ti-link text-xs"></i> ${domain}
+                    <a href="${bm.url}" target="_blank" rel="noopener noreferrer" class="text-sm text-primary hover:underline flex items-center gap-1 mb-3 line-clamp-1" title="Buka tautan ${bm.url}">
+                        <i class="ti ti-link text-xs" aria-hidden="true"></i> ${domain}
                     </a>
-                    ${bm.note ? `<p class="text-gray-500 text-sm mt-auto border-t border-gray-100 pt-3 line-clamp-2">${bm.note}</p>` : '<div class="mt-auto"></div>'}
+                    ${bm.note ? `<p class="text-gray-600 text-sm mt-auto border-t border-gray-100 pt-3 line-clamp-2">${bm.note}</p>` : '<div class="mt-auto"></div>'}
                 `;
                 bookmarkList.appendChild(card);
             });
