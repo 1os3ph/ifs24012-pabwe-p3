@@ -1,5 +1,5 @@
 /**
- * PabweHub - Main Script
+ * DelStudHub - Main Script
  * Mencakup fitur Expense Tracker, Bookmark Manager, dan Quiz App.
  */
 
